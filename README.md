@@ -1,6 +1,6 @@
 # Ansh Battery Care Website
 
-A professional React-based website developed for a battery and inverter retail business located in Sangaria, Hanumangarh, Rajasthan.
+A professional React-based website developed for a battery and inverter retail business.
 
 ## 🚀 Features
 - Clean and modern UI
@@ -13,10 +13,6 @@ A professional React-based website developed for a battery and inverter retail b
 - React (Vite)
 - JavaScript
 - HTML & CSS
-
-## 📍 Business Details
-**Ansh Battery Care**  
-Sangaria, Hanumangarh, Rajasthan  
 
 ## ▶️ Run Locally
 ```bash
