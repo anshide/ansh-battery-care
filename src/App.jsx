@@ -7,6 +7,7 @@ import About from './components/About';
 import WhyChooseUs from './components/WhyChooseUs';
 import Products from './components/Products';
 import BatteryFinder from './components/BatteryFinder';
+import BillDemand from './components/BillDemand';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -20,6 +21,7 @@ function App() {
       <WhyChooseUs />
       <Products />
       <BatteryFinder />
+      <BillDemand />
       <Contact />
       <Footer />
       <WhatsAppButton />

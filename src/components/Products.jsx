@@ -3,17 +3,21 @@ import React, { useState } from 'react';
 const Products = () => {
   const categories = {
     car: [
-      { name: 'Exide Epiq', desc: 'Premium long-life battery with 6-year warranty for sedans and SUVs.' },
-      { name: 'Amaron Flo', desc: 'High-cranking power designed for all weather conditions.' },
-      { name: 'Tata Green Silver', desc: 'Reliable performance for daily city commutes and short trips.' },
+      { name: 'Powerzone PZ8000L/R', desc: 'Ideal for Tata Safari (Diesel). Includes a 36-month warranty.' },
+      { name: 'Exide Express XP 800F', desc: 'Ideal for Tata Safari (Diesel). Includes a 42-month warranty.' },
+      { name: 'Powerzone PZ7000R', desc: 'Ideal for Toyota Innova (Diesel). Includes a 36-month warranty.' },
+      { name: 'Exide Ride700L', desc: 'Ideal for Toyota Innova (Diesel). Includes a 24-month warranty.' },
+      { name: 'Exide MILDIN50', desc: 'Ideal for Maruti Swift (Diesel). Warranty details available upon inquiry.' },
     ],
     bike: [
       { name: 'Exide Xplore', desc: 'Spill-proof VRLA battery — maintenance-free for everyday rides.' },
       { name: 'Amaron Pro Bike', desc: 'Consistent power for smooth starts every single time.' },
+      { name: 'Dummy Bike Battery', desc: 'Details for your new bike battery will go here.' },
     ],
     inverter: [
       { name: 'Luminous Zelio', desc: 'Smart home UPS with intuitive digital display and auto-reset.' },
       { name: 'Microtek EB 700', desc: 'Heavy-duty power backup trusted by thousands of homes.' },
+      { name: 'Dummy Inverter/Battery', desc: 'Details for your new inverter battery will go here.' },
     ],
   };
 

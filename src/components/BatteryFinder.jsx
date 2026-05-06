@@ -4,9 +4,43 @@ const BatteryFinder = () => {
   const [vehicleType, setVehicleType] = useState('');
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
+  const [fuelType, setFuelType] = useState('');
+  const [showResult, setShowResult] = useState(false);
 
-  const getRecommendation = () => {
-    if (vehicleType === 'car') return '✅ Recommended: 35Ah – 45Ah battery';
+  const handleSearch = () => {
+    if (vehicleType) {
+      setShowResult(true);
+    }
+  };
+
+  const resetResult = () => {
+    setShowResult(false);
+  };
+
+  const getRecommendations = () => {
+    if (vehicleType === 'car') {
+      if (brand === 'tata' && model === 'safari' && fuelType === 'diesel') {
+        return [
+          { company: 'Powerzone', name: 'PZ8000L/R', warranty: '36 Months', image: '', infoLink: '#' },
+          { company: 'Exide', name: 'Express XP 800F', warranty: '42 Months', image: '', infoLink: '#' }
+        ];
+      }
+      if (brand === 'toyota' && model === 'innova' && fuelType === 'diesel') {
+        return [
+          { company: 'Powerzone', name: 'PZ7000R', warranty: '36 Months', image: '', infoLink: '#' },
+          { company: 'Exide', name: 'Ride700L', warranty: '24 Months', image: '', infoLink: '#' }
+        ];
+      }
+      if (brand === 'maruti' && model === 'swift' && fuelType === 'diesel') {
+        return [
+          { company: 'Exide', name: 'MILDIN50', warranty: 'Contact for details', image: '', infoLink: '#' }
+        ];
+      }
+      if (brand && model && fuelType) {
+         return `✅ Recommended for ${brand} ${model} (${fuelType}): Please contact us for the exact match.`;
+      }
+      return '✅ Recommended: 35Ah – 45Ah battery. Contact us for exact match.';
+    }
     if (vehicleType === 'bike') return '✅ Recommended: 4Ah – 7Ah battery';
     if (vehicleType === 'truck') return '✅ Recommended: 100Ah – 150Ah battery';
     return '';
@@ -35,6 +69,8 @@ const BatteryFinder = () => {
                 setVehicleType(e.target.value);
                 setBrand('');
                 setModel('');
+                setFuelType('');
+                resetResult();
               }}
             >
               <option value="">Vehicle Type</option>
@@ -46,37 +82,96 @@ const BatteryFinder = () => {
             <select
               className="finder-select"
               value={brand}
-              onChange={(e) => setBrand(e.target.value)}
+              onChange={(e) => { 
+                setBrand(e.target.value); 
+                setModel(''); 
+                setFuelType(''); 
+                resetResult(); 
+              }}
               disabled={!vehicleType}
             >
               <option value="">Select Brand</option>
               <option value="maruti">Maruti Suzuki</option>
-              <option value="hyundai">Hyundai</option>
               <option value="tata">Tata Motors</option>
-              <option value="honda">Honda</option>
+              <option value="toyota">Toyota</option>
             </select>
 
             <select
               className="finder-select"
               value={model}
-              onChange={(e) => setModel(e.target.value)}
+              onChange={(e) => { 
+                setModel(e.target.value); 
+                setFuelType(''); 
+                resetResult(); 
+              }}
               disabled={!brand}
             >
               <option value="">Select Model</option>
-              <option value="swift">Swift</option>
-              <option value="creta">Creta</option>
-              <option value="nexon">Nexon</option>
-              <option value="city">City</option>
+              {brand === 'maruti' && <option value="swift">Swift</option>}
+              {brand === 'tata' && <option value="safari">Safari</option>}
+              {brand === 'toyota' && <option value="innova">Innova</option>}
+            </select>
+
+            <select
+              className="finder-select"
+              value={fuelType}
+              onChange={(e) => { 
+                setFuelType(e.target.value); 
+                resetResult(); 
+              }}
+              disabled={!model}
+            >
+              <option value="">Fuel Type</option>
+              <option value="petrol">Petrol</option>
+              <option value="diesel">Diesel</option>
+              <option value="cng">CNG</option>
             </select>
           </div>
 
-          <button className="finder-btn">Search Battery</button>
+          <button className="finder-btn" onClick={handleSearch}>Search Battery</button>
 
-          {getRecommendation() && (
-            <div className="finder-result">
-              {getRecommendation()}
-            </div>
-          )}
+          {showResult && (() => {
+            const result = getRecommendations();
+            if (!result) return null;
+            
+            if (Array.isArray(result)) {
+              if (result.length === 0) return null;
+              return (
+                <div className="finder-result-cards">
+                  {result.map((battery, idx) => (
+                    <div className="battery-card" key={idx}>
+                      <div className="battery-image-placeholder">
+                        {battery.image ? (
+                          <img src={battery.image} alt={battery.name} />
+                        ) : (
+                          <span>Image Coming Soon</span>
+                        )}
+                      </div>
+                      <div className="battery-details">
+                        <span className="battery-company">{battery.company}</span>
+                        <h4>{battery.name}</h4>
+                        <p className="battery-warranty">Warranty: {battery.warranty}</p>
+                        <a 
+                          href={battery.infoLink} 
+                          className="battery-info-btn"
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          More Info →
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            }
+
+            return (
+              <div className="finder-result">
+                {result}
+              </div>
+            );
+          })()}
         </div>
       </div>
     </section>
