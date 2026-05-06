@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-inner">
         <a href="#" className="logo">
-          Ansh<span>Battery</span>
+          Ansh<span>BatteryCare</span>
         </a>
 
         {/* Hamburger button for mobile */}
